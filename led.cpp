@@ -88,21 +88,6 @@ void runRedLed(void *p) {
       vTaskDelay(delay);
       digitalWrite(red, LOW);
       vTaskDelay(delay);
-
-//      tone(BUZZER,D3,Q_SHARK);
-//      		vTaskDelay(1+Q_SHARK);
-//      		tone(BUZZER,E3,Q_SHARK);
-//      		vTaskDelay(1+Q_SHARK);
-
-//  	tone(BUZZER,G3,E);
-//  	vTaskDelay(1+E); //delay duration should always be 1 ms more than the note in order to separate them.
-//  	tone(BUZZER,C4,E);
-//  	vTaskDelay(1+E);
-//  	tone(BUZZER,E4,E);
-//  	vTaskDelay(1+E);
-//  	tone(BUZZER,G5,Q);
-//  	vTaskDelay(1+Q);
-
       xSemaphoreGive(xSemaphoreRed);
     }
   }

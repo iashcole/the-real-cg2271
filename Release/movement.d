@@ -22,7 +22,7 @@ movement.o: ../movement.cpp \
  C:\Users\teo_a\workspace\freeRTOS\Source\include/queue.h \
  C:\Users\teo_a\workspace\freeRTOS\Source\include/semphr.h \
  C:\Users\teo_a\workspace\freeRTOS\Source\include/queue.h ../constant.h \
- ../led.h
+ ../led.h ../buzzer.h
 
 C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/Arduino.h:
 
@@ -73,3 +73,5 @@ C:\Users\teo_a\workspace\freeRTOS\Source\include/queue.h:
 ../constant.h:
 
 ../led.h:
+
+../buzzer.h:

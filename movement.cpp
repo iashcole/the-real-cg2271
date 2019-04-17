@@ -14,13 +14,14 @@
 
 #include "constant.h"
 #include "led.h"
+#include "buzzer.h"
 
 QueueHandle_t xCommandQueue = xQueueCreate(10, sizeof(char));
 
 void movementTask(void *p)
 {
   char val1;
-  bool isMoving=false;
+  bool isMoving=false, temp=false;
   int velocity=255;
   byte leds;
   while(1) {
@@ -38,14 +39,20 @@ void movementTask(void *p)
 				updateShiftRegister(leds);
 				delay(500);
 			}
-    	  	  xSemaphoreGive(xSemaphoreRed);
+			  xSemaphoreGive(xSemaphoreRed);
     	  	  xSemaphoreGive(xSemaphoreGreen);
+//    	  	  temp = true;
+//    	  	  xQueueOverwrite(xQueueMusic, &temp);
+//    	  	  xSemaphoreGive(xSemaphoreMusic);
+    	  	starttone();
+
           }
     // End, play victory tone
     else if (val1 == 'x')
           {
     		xSemaphoreTake(xSemaphoreRed, portMAX_DELAY);
     		xSemaphoreTake(xSemaphoreGreen, portMAX_DELAY);
+    		endtone();
           }
     /*********For Forward motion*********/
     else if (val1 == 'F')

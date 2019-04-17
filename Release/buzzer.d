@@ -21,7 +21,8 @@ buzzer.o: ../buzzer.cpp \
  C:\Users\teo_a\workspace\freeRTOS\Source\include/list.h \
  C:\Users\teo_a\workspace\freeRTOS\Source\include/queue.h \
  C:\Users\teo_a\workspace\freeRTOS\Source\include/semphr.h \
- C:\Users\teo_a\workspace\freeRTOS\Source\include/queue.h ../constant.h
+ C:\Users\teo_a\workspace\freeRTOS\Source\include/queue.h ../constant.h \
+ ../led.h
 
 C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/Arduino.h:
 
@@ -70,3 +71,5 @@ C:\Users\teo_a\workspace\freeRTOS\Source\include/semphr.h:
 C:\Users\teo_a\workspace\freeRTOS\Source\include/queue.h:
 
 ../constant.h:
+
+../led.h:
