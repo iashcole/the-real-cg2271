@@ -43,12 +43,12 @@ void setup()
    pinMode(clockPin, OUTPUT);
    //set the serial communication rate
   Serial.begin(9600);
-//      xTaskCreate(babysharkTask, "BabyShark", 100, (void *)BUZZER, 1, NULL);
-  xTaskCreate(runGreenLed, "greenLED", 50, NULL, 1, NULL);
-	xTaskCreate(runRedLed, "redLED", 50, NULL, 1, NULL);
-	  xTaskCreate(movementTask, "movementtask", 50, NULL, 3, NULL);
+      xTaskCreate(babysharkTask, "BabyShark", 300, NULL, 1, NULL);
+      xTaskCreate(runLed, "greenLED", 100, NULL, 1, NULL);
 
-	xTaskCreate(bluetoothReceive, "bluetooth", 100, NULL, 2, NULL);
+	  xTaskCreate(movementTask, "movementtask", 100, NULL, 4, NULL);
+
+	xTaskCreate(bluetoothReceive, "bluetooth", 100, NULL, 3, NULL);
 	vTaskStartScheduler();
 }
 

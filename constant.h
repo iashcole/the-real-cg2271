@@ -68,12 +68,12 @@ const int clockPin = 13; //orange
 const int dataPin = 11; //blue
 
 //Declare the arduino pins
-const int horn = 11; //buzzer
+const int horn = 7; //buzzer
 const int lm1 = 10; //left motor f
 const int lm2 = 9;  //left motor r
-const int rm1 = 8;  //right motor f
-const int rm2 = 7; //right motor r
-const int red = 6; //red leds
-const int BUZZER = 5;
+const int rm1 = 6;  //right motor f 8
+const int rm2 = 5; //right motor r 7
+const int red = 8; //red leds 6
+const int BUZZER = 2;
 
 #endif /* CONSTANT_H_ */

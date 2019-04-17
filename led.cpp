@@ -27,10 +27,11 @@ void updateShiftRegister(byte leds)
    digitalWrite(latchPin, HIGH);
 }
 
-void runGreenLed(void *p){
+void runLed(void *p){
   int i=0;
+  int count=0;
   byte leds = 0;
-  bool isMoving = false;
+  bool state = true, isMoving = false;
   while(1)
   {
     if(xQueueReceive(xQueueGreen, &isMoving, (TickType_t) 0)) {
@@ -43,16 +44,25 @@ void runGreenLed(void *p){
 			  leds = 1;
 			  leds = leds << i;
 			  updateShiftRegister(leds);
-			  vTaskDelay(50);
+			  vTaskDelay(62.5);
+			  count+= 50;
 			  xQueueReceive(xQueueGreen, &isMoving, (TickType_t) 0);
+//			  if(count%500 == 0) {
+
+//			  }
           }
+          digitalWrite(red, state);
           for (i=0;i<8 && isMoving; ++i){
 			  leds = 10000000;
 			  leds = leds >> i;
 			  updateShiftRegister(leds);
-			  vTaskDelay(50);
+			  vTaskDelay(62.5);
 			  xQueueReceive(xQueueGreen, &isMoving, (TickType_t) 0);
+			  //if(count%500 == 0) {
+
+//			  }
           }
+          digitalWrite(red, !state);
           if(isMoving) {
         	  xQueueOverwrite(xQueueGreen, &isMoving);
           }
@@ -65,30 +75,36 @@ void runGreenLed(void *p){
 				updateShiftRegister(leds);
 				vTaskDelay(200);
 				xSemaphoreGive(xSemaphoreGreen);
+
+			      digitalWrite(red, state);
+			      vTaskDelay(250);
+			      digitalWrite(red, !state);
+			      vTaskDelay(250);
+
 			}
       }
     }
 }
-void runRedLed(void *p) {
-  bool isMoving=false;
-  int delay=250;
-  while(1)
-  {
-    if(xQueueReceive(xQueueRed, &isMoving, (TickType_t) 0)) {
-      if(isMoving == true) {
-        delay = 500;
-      }
-        else {
-        delay = 250;
-      }
-    }
-    // When stationery
-    if(xSemaphoreTake(xSemaphoreRed, portMAX_DELAY) == pdTRUE) {
-      digitalWrite(red, HIGH);
-      vTaskDelay(delay);
-      digitalWrite(red, LOW);
-      vTaskDelay(delay);
-      xSemaphoreGive(xSemaphoreRed);
-    }
-  }
-}
+//void runRedLed(void *p) {
+//  bool isMoving=false;
+//  TickType_t delay=250;
+//  while(1)
+//  {
+//    if(xQueueReceive(xQueueRed, &isMoving, (TickType_t) 0)) {
+//      if(isMoving == true) {
+//        delay = 500;
+//      }
+//        else {
+//        delay = 250;
+//      }
+//    }
+//    // When stationery
+//    if(xSemaphoreTake(xSemaphoreRed, portMAX_DELAY) == pdTRUE) {
+//      digitalWrite(red, HIGH);
+//      vTaskDelay(delay);
+//      digitalWrite(red, LOW);
+//      vTaskDelay(delay);
+//      xSemaphoreGive(xSemaphoreRed);
+//    }
+//  }
+//}

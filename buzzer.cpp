@@ -52,6 +52,21 @@
 #define B5  987.77
 #define C6  1046.50
 
+#define NOTE_C4  262   //Defining note frequency
+#define NOTE_D4  294
+#define NOTE_E4  330
+#define NOTE_F4  349
+#define NOTE_G4  392
+#define NOTE_A4  440
+#define NOTE_B4  494
+#define NOTE_C5  523
+#define NOTE_D5  587
+#define NOTE_E5  659
+#define NOTE_F5  698
+#define NOTE_G5  784
+#define NOTE_A5  880
+#define NOTE_B5  988
+
 #define BPM 120      // tempo
 #define H 2*Q        // half 2/4
 #define Q 60000/BPM  // quarter 1/4
@@ -59,7 +74,7 @@
 #define S Q/4        // sixteenth 1/16
 #define W 4*Q        // whole 4/4
 
-#define BPM_SHARK 100
+#define BPM_SHARK 240
 #define H_SHARK 2*Q_SHARK        // half 2/4
 #define Q_SHARK 60000/BPM_SHARK  // quarter 1/4
 #define E_SHARK Q_SHARK/2        // eighth 1/8
@@ -69,6 +84,7 @@
 QueueHandle_t xQueueMusic = xQueueCreate(1, sizeof(bool));
 
 SemaphoreHandle_t xSemaphoreMusic = xSemaphoreCreateBinary();
+
 
 void myTone(byte pin, uint16_t frequency, uint16_t duration)
 { // input parameters: Arduino pin number, frequency in Hz, duration in milliseconds
@@ -86,75 +102,176 @@ void myTone(byte pin, uint16_t frequency, uint16_t duration)
 }
 
 void starttone() {
-	myTone(BUZZER, G3, E);
-	delay(1 + E); //delay duration should always be 1 ms more than the note in order to separate them.
-	myTone(BUZZER, C4, E);
-	delay(1 + E);
-	myTone(BUZZER, E4, E);
-	delay(1 + E);
-	myTone(BUZZER, G5, Q);
-	delay(1 + Q);
+
+//	myTone(BUZZER, G3, E);
+//	delay(1 + E); //delay duration should always be 1 ms more than the note in order to separate them.
+//	myTone(BUZZER, C4, E);
+//	delay(1 + E);
+//	myTone(BUZZER, E4, E);
+//	delay(1 + E);
+//	myTone(BUZZER, G5, Q);
+//	delay(1 + Q);
+	myTone(BUZZER,660,100);
+	delay(150);
+	myTone(BUZZER,660,100);
+	delay(300);
+	myTone(BUZZER,660,100);
+	delay(300);
+	myTone(BUZZER,510,100);
+	delay(100);
+	myTone(BUZZER,660,100);
+	delay(300);
+	myTone(BUZZER,770,100);
+	delay(550);
+	myTone(BUZZER,380,100);
+	delay(575);
 }
 
 void endtone() {
-	myTone(BUZZER,G3,E);
-		delay(1+E); //delay duration should always be 1 ms more than the note in order to separate them.
-		myTone(BUZZER,C4,E);
-		delay(1+E);
-		myTone(BUZZER,E4,E);
-		delay(1+E);
-		myTone(BUZZER,G4,E);
-		delay(1+E);
-		myTone(BUZZER,C5,E);
-		delay(1+E);
-		myTone(BUZZER,E5,E);
-		delay(1+E);
-		myTone(BUZZER,G5,Q+E);
-		delay(1+Q+E);
-		myTone(BUZZER,E5,Q+E);
-		delay(1+Q+E);
+//	myTone(BUZZER,G3,E);
+//		delay(1+E); //delay duration should always be 1 ms more than the note in order to separate them.
+//		myTone(BUZZER,C4,E);
+//		delay(1+E);
+//		myTone(BUZZER,E4,E);
+//		delay(1+E);
+//		myTone(BUZZER,G4,E);
+//		delay(1+E);
+//		myTone(BUZZER,C5,E);
+//		delay(1+E);
+//		myTone(BUZZER,E5,E);
+//		delay(1+E);
+//		myTone(BUZZER,G5,Q+E);
+//		delay(1+Q+E);
+//		myTone(BUZZER,E5,Q+E);
+//		delay(1+Q+E);
+////
+//		myTone(BUZZER,Ab3,E);
+//		delay(1+E);
+//		myTone(BUZZER,C4,E);
+//		delay(1+E);
+//		myTone(BUZZER,Eb4,E);
+//		delay(1+E);
+//		myTone(BUZZER,Ab4,E);
+//		delay(1+E);
+//		myTone(BUZZER,C5,E);
+//		delay(1+E);
+//		myTone(BUZZER,Eb5,E);
+//		delay(1+E);
+//		myTone(BUZZER,Ab5,Q+E);
+//		delay(1+Q+E);
+//		myTone(BUZZER,Eb5,Q+E);
+//		delay(1+Q+E);
+//
+//		myTone(BUZZER,Bb3,E);
+//		delay(1+E);
+//		myTone(BUZZER,D4,E);
+//		delay(1+E);
+//		myTone(BUZZER,F4,E);
+//		delay(1+E);
+//		myTone(BUZZER,Bb4,E);
+//		delay(1+E);
+//		myTone(BUZZER,D5,E);
+//		delay(1+E);
+//		myTone(BUZZER,F5,E);
+//		delay(1+E);
+//		myTone(BUZZER,Bb5,Q+E);
+//		delay(1+Q+E);
+//		myTone(BUZZER,Bb5,E);
+//		delay(1+E);
+//		myTone(BUZZER,Bb5,E);
+//		delay(1+E);
+//		myTone(BUZZER,Bb5,E);
+//		delay(1+E);
+//		myTone(BUZZER,C6,H+Q+E);
+//		delay(1+H+Q+E);
+//
+//		delay(2*H);
 
-		myTone(BUZZER,Ab3,E);
-		delay(1+E);
-		myTone(BUZZER,C4,E);
-		delay(1+E);
-		myTone(BUZZER,Eb4,E);
-		delay(1+E);
-		myTone(BUZZER,Ab4,E);
-		delay(1+E);
-		myTone(BUZZER,C5,E);
-		delay(1+E);
-		myTone(BUZZER,Eb5,E);
-		delay(1+E);
-		myTone(BUZZER,Ab5,Q+E);
-		delay(1+Q+E);
-		myTone(BUZZER,Eb5,Q+E);
-		delay(1+Q+E);
+	myTone(9,660,100);
+	delay(150);
+	myTone(9,660,100);
+	delay(300);
+	myTone(9,660,100);
+	delay(300);
+	myTone(9,510,100);
+	delay(100);
+	myTone(9,660,100);
+	delay(300);
+	myTone(9,770,100);
+	delay(550);
+	myTone(9,380,100);
+	delay(575);
 
-		myTone(BUZZER,Bb3,E);
-		delay(1+E);
-		myTone(BUZZER,D4,E);
-		delay(1+E);
-		myTone(BUZZER,F4,E);
-		delay(1+E);
-		myTone(BUZZER,Bb4,E);
-		delay(1+E);
-		myTone(BUZZER,D5,E);
-		delay(1+E);
-		myTone(BUZZER,F5,E);
-		delay(1+E);
-		myTone(BUZZER,Bb5,Q+E);
-		delay(1+Q+E);
-		myTone(BUZZER,Bb5,E);
-		delay(1+E);
-		myTone(BUZZER,Bb5,E);
-		delay(1+E);
-		myTone(BUZZER,Bb5,E);
-		delay(1+E);
-		myTone(BUZZER,C6,H+Q+E);
-		delay(1+H+Q+E);
+	myTone(9,510,100);
+	delay(450);
+	myTone(9,380,100);
+	delay(400);
+	myTone(9,320,100);
+	delay(500);
+	myTone(9,440,100);
+	delay(300);
+	myTone(9,480,80);
+	delay(330);
+	myTone(9,450,100);
+	delay(150);
+	myTone(9,430,100);
+	delay(300);
+	myTone(9,380,100);
+	delay(200);
+	myTone(9,660,80);
+	delay(200);
+	myTone(9,760,50);
+	delay(150);
+	myTone(9,860,100);
+	delay(300);
+	myTone(9,700,80);
+	delay(150);
+	myTone(9,760,50);
+	delay(350);
+	myTone(9,660,80);
+	delay(300);
+	myTone(9,520,80);
+	delay(150);
+	myTone(9,580,80);
+	delay(150);
+	myTone(9,480,80);
+	delay(500);
 
-		delay(2*H);
+	myTone(9,510,100);
+	delay(450);
+	myTone(9,380,100);
+	delay(400);
+	myTone(9,320,100);
+	delay(500);
+	myTone(9,440,100);
+	delay(300);
+	myTone(9,480,80);
+	delay(330);
+	myTone(9,450,100);
+	delay(150);
+	myTone(9,430,100);
+	delay(300);
+	myTone(9,380,100);
+	delay(200);
+	myTone(9,660,80);
+	delay(200);
+	myTone(9,760,50);
+	delay(150);
+	myTone(9,860,100);
+	delay(300);
+	myTone(9,700,80);
+	delay(150);
+	myTone(9,760,50);
+	delay(350);
+	myTone(9,660,80);
+	delay(300);
+	myTone(9,520,80);
+	delay(150);
+	myTone(9,580,80);
+	delay(150);
+	myTone(9,480,80);
+	delay(500);
+
 }
 
 void sequence() {
@@ -179,8 +296,8 @@ void sequence() {
 void babysharkTask(void *p) {
 	bool isPlaying;
 	for (;;) {
-		if(xQueueReceive(xQueueMusic, &isPlaying, (TickType_t) 0)) {
-		if(xSemaphoreTake(xSemaphoreMusic, portMAX_DELAY)) {
+//		if(xQueueReceive(xQueueMusic, &isPlaying, (TickType_t) 0)) {
+//		if(xSemaphoreTake(xSemaphoreMusic, portMAX_DELAY)) {
 				myTone(BUZZER,D3,Q_SHARK);
 				vTaskDelay(1+Q_SHARK);
 				myTone(BUZZER,E3,Q_SHARK);
@@ -208,8 +325,8 @@ void babysharkTask(void *p) {
 				vTaskDelay(1+E_SHARK);
 				myTone(BUZZER,Gb4,H_SHARK);
 				vTaskDelay(1+H_SHARK);
-				xSemaphoreGive(xSemaphoreMusic);
+//				xSemaphoreGive(xSemaphoreMusic);
 		}
-	}
-	}
+//	}
+//	}
 }

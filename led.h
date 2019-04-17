@@ -13,8 +13,8 @@ extern QueueHandle_t xQueueGreen;
 extern SemaphoreHandle_t xSemaphoreGreen;
 extern SemaphoreHandle_t xSemaphoreRed;
 
-void runGreenLed(void *);
-void runRedLed(void *);
+void runLed(void *);
+
 void updateShiftRegister(byte);
 
 

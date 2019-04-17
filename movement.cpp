@@ -17,6 +17,7 @@
 #include "buzzer.h"
 
 QueueHandle_t xCommandQueue = xQueueCreate(10, sizeof(char));
+TaskHandle_t xBBShandle;
 
 void movementTask(void *p)
 {
@@ -26,8 +27,8 @@ void movementTask(void *p)
   byte leds;
   while(1) {
   if (xQueueReceive(xCommandQueue, &val1, (TickType_t) portMAX_DELAY) == pdTRUE) {
-    Serial.println(val1);
-    Serial.println("does this execute?");
+    //Serial.println(val1);
+    //Serial.println("does this execute?");
     // Upon start
     if (val1 == 'X')
           {
@@ -39,13 +40,14 @@ void movementTask(void *p)
 				updateShiftRegister(leds);
 				delay(500);
 			}
-			  xSemaphoreGive(xSemaphoreRed);
-    	  	  xSemaphoreGive(xSemaphoreGreen);
+
 //    	  	  temp = true;
 //    	  	  xQueueOverwrite(xQueueMusic, &temp);
 //    	  	  xSemaphoreGive(xSemaphoreMusic);
-    	  	starttone();
-
+    	  	 //vTaskSuspend(xBBShandle);
+    	  	  starttone();
+			  xSemaphoreGive(xSemaphoreRed);
+    	  	  xSemaphoreGive(xSemaphoreGreen);
           }
     // End, play victory tone
     else if (val1 == 'x')
