@@ -1,4 +1,4 @@
-test.o: ../test.cpp \
+buzzer.o: ../buzzer.cpp \
  C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/Arduino.h \
  C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/binary.h \
  C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/WCharacter.h \
@@ -21,8 +21,7 @@ test.o: ../test.cpp \
  C:\Users\teo_a\workspace\freeRTOS\Source\include/list.h \
  C:\Users\teo_a\workspace\freeRTOS\Source\include/queue.h \
  C:\Users\teo_a\workspace\freeRTOS\Source\include/semphr.h \
- C:\Users\teo_a\workspace\freeRTOS\Source\include/queue.h ../constant.h \
- ../led.h ../movement.h ../buzzer.h
+ C:\Users\teo_a\workspace\freeRTOS\Source\include/queue.h ../constant.h
 
 C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/Arduino.h:
 
@@ -71,9 +70,3 @@ C:\Users\teo_a\workspace\freeRTOS\Source\include/semphr.h:
 C:\Users\teo_a\workspace\freeRTOS\Source\include/queue.h:
 
 ../constant.h:
-
-../led.h:
-
-../movement.h:
-
-../buzzer.h:

@@ -4,16 +4,19 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 CPP_SRCS += \
+../buzzer.cpp \
 ../led.cpp \
 ../movement.cpp \
 ../test.cpp 
 
 OBJS += \
+./buzzer.o \
 ./led.o \
 ./movement.o \
 ./test.o 
 
 CPP_DEPS += \
+./buzzer.d \
 ./led.d \
 ./movement.d \
 ./test.d 
