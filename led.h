@@ -8,15 +8,11 @@
 #ifndef LED_H_
 #define LED_H_
 
-extern QueueHandle_t xQueueRed;
-extern QueueHandle_t xQueueGreen;
-extern SemaphoreHandle_t xSemaphoreGreen;
-extern SemaphoreHandle_t xSemaphoreRed;
+extern QueueHandle_t xQueueLed;
+extern SemaphoreHandle_t xSemaphoreLed;
 
-void runLed(void *);
+void tLED(void *);
 
 void updateShiftRegister(byte);
-
-
 
 #endif /* LED_H_ */

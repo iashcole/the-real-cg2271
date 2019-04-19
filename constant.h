@@ -46,6 +46,21 @@
 #define B5  987.77
 #define C6  1046.50
 
+#define NOTE_C4  262   //Defining note frequency
+#define NOTE_D4  294
+#define NOTE_E4  330
+#define NOTE_F4  349
+#define NOTE_G4  392
+#define NOTE_A4  440
+#define NOTE_B4  494
+#define NOTE_C5  523
+#define NOTE_D5  587
+#define NOTE_E5  659
+#define NOTE_F5  698
+#define NOTE_G5  784
+#define NOTE_A5  880
+#define NOTE_B5  988
+
 #define BPM 120      // tempo
 #define H 2*Q        // half 2/4
 #define Q 60000/BPM  // quarter 1/4
@@ -53,7 +68,7 @@
 #define S Q/4        // sixteenth 1/16
 #define W 4*Q        // whole 4/4
 
-#define BPM_SHARK 100
+#define BPM_SHARK 240
 #define H_SHARK 2*Q_SHARK        // half 2/4
 #define Q_SHARK 60000/BPM_SHARK  // quarter 1/4
 #define E_SHARK Q_SHARK/2        // eighth 1/8

@@ -17,18 +17,15 @@
 #include "buzzer.h"
 
 QueueHandle_t xCommandQueue = xQueueCreate(10, sizeof(char));
-TaskHandle_t xBBShandle;
 
-void movementTask(void *p)
+void tMotorControl(void *p)
 {
   char val1;
-  bool isMoving=false, temp=false;
+  bool isMoving=false;
   int velocity=255;
   byte leds;
   while(1) {
   if (xQueueReceive(xCommandQueue, &val1, (TickType_t) portMAX_DELAY) == pdTRUE) {
-    //Serial.println(val1);
-    //Serial.println("does this execute?");
     // Upon start
     if (val1 == 'X')
           {
@@ -40,20 +37,13 @@ void movementTask(void *p)
 				updateShiftRegister(leds);
 				delay(500);
 			}
-
-//    	  	  temp = true;
-//    	  	  xQueueOverwrite(xQueueMusic, &temp);
-//    	  	  xSemaphoreGive(xSemaphoreMusic);
-    	  	 //vTaskSuspend(xBBShandle);
     	  	  starttone();
-			  xSemaphoreGive(xSemaphoreRed);
-    	  	  xSemaphoreGive(xSemaphoreGreen);
+    	  	  xSemaphoreGive(xSemaphoreLed);
           }
     // End, play victory tone
     else if (val1 == 'x')
           {
-    		xSemaphoreTake(xSemaphoreRed, portMAX_DELAY);
-    		xSemaphoreTake(xSemaphoreGreen, portMAX_DELAY);
+    		xSemaphoreTake(xSemaphoreLed, portMAX_DELAY);
     		endtone();
           }
     /*********For Forward motion*********/
@@ -63,8 +53,8 @@ void movementTask(void *p)
       analogWrite(lm1,velocity);  analogWrite(rm1,velocity);
       digitalWrite(lm2,LOW);       digitalWrite(rm2,LOW);
       isMoving=true;
-      xQueueOverwrite(xQueueRed, &isMoving);
-      xQueueOverwrite(xQueueGreen, &isMoving);
+
+      xQueueOverwrite(xQueueLed, &isMoving);
       }
 
       /*********For Backward Motion*********/
@@ -74,8 +64,8 @@ void movementTask(void *p)
         analogWrite(lm2,velocity);  analogWrite(rm2,velocity);
       digitalWrite(lm1,0);       digitalWrite(rm1,0);
       isMoving=true;
-      xQueueOverwrite(xQueueRed, &isMoving);
-      xQueueOverwrite(xQueueGreen, &isMoving);
+
+      xQueueOverwrite(xQueueLed, &isMoving);
       }
        /*********Right*********/
       else if(val1 == 'R')
@@ -84,8 +74,8 @@ void movementTask(void *p)
       analogWrite(lm1,velocity);  digitalWrite(rm1,LOW);
       digitalWrite(lm2,LOW);       analogWrite(rm2,velocity);
       isMoving=true;
-      xQueueOverwrite(xQueueRed, &isMoving);
-      xQueueOverwrite(xQueueGreen, &isMoving);
+
+      xQueueOverwrite(xQueueLed, &isMoving);
       }
        /*********Left*********/
       else if(val1 == 'L')
@@ -94,48 +84,48 @@ void movementTask(void *p)
        digitalWrite(lm1,LOW);  analogWrite(rm1,velocity);
       analogWrite(lm2, velocity);       digitalWrite(rm2,LOW);
       isMoving=true;
-      xQueueOverwrite(xQueueRed, &isMoving);
-      xQueueOverwrite(xQueueGreen, &isMoving);
+
+      xQueueOverwrite(xQueueLed, &isMoving);
       }
         /*********FrontLeft*********/
       else if(val1 == 'G')
       {
        Serial.println("FRONTLEFT");
-       analogWrite(lm1,velocity/2);  analogWrite(rm1,velocity);
+       analogWrite(lm1,velocity/3);  analogWrite(rm1,velocity);
       digitalWrite(lm2,LOW);       digitalWrite(rm2,LOW);
       isMoving=true;
-      xQueueOverwrite(xQueueRed, &isMoving);
-      xQueueOverwrite(xQueueGreen, &isMoving);
+
+      xQueueOverwrite(xQueueLed, &isMoving);
       }
         /*********FrontRight*********/
       else if(val1 == 'I')
       {
        Serial.println("FRONTRIGHT");
-      analogWrite(lm1,velocity);  analogWrite(rm1,velocity/2);
+      analogWrite(lm1,velocity);  analogWrite(rm1,velocity/3);
       digitalWrite(lm2,LOW);   digitalWrite(rm2, LOW);
       isMoving=true;
-      xQueueOverwrite(xQueueRed, &isMoving);
-      xQueueOverwrite(xQueueGreen, &isMoving);
+
+      xQueueOverwrite(xQueueLed, &isMoving);
       }
         /*********BackLeft*********/
       else if(val1 == 'H')
       {
        Serial.println("BACKLEFT");
-        analogWrite(lm2,velocity/2);  analogWrite(rm2,velocity);
+        analogWrite(lm2,velocity/3);  analogWrite(rm2,velocity);
       digitalWrite(lm1,LOW);     digitalWrite(rm1,LOW);
       isMoving=true;
-      xQueueOverwrite(xQueueRed, &isMoving);
-      xQueueOverwrite(xQueueGreen, &isMoving);
+
+      xQueueOverwrite(xQueueLed, &isMoving);
       }
         /*********BackRight*********/
       else if(val1 == 'J')
       {
        Serial.println("BACKRIGHT");
-        analogWrite(lm2,velocity);  analogWrite(rm2,velocity/2);
+        analogWrite(lm2,velocity);  analogWrite(rm2,velocity/3);
       digitalWrite(lm1,LOW);       digitalWrite(rm1,LOW);
       isMoving=true;
-      xQueueOverwrite(xQueueRed, &isMoving);
-      xQueueOverwrite(xQueueGreen, &isMoving);
+
+      xQueueOverwrite(xQueueLed, &isMoving);
       }
        /*********Horn*********/
      else if(val1 == 'V')
@@ -196,12 +186,11 @@ void movementTask(void *p)
 	  /*********STOP*********/
       else if(val1 == 'S')
           {
-//          Serial.println("Invalid!!!");
            digitalWrite(lm1,LOW);  digitalWrite(rm1,LOW);
           digitalWrite(lm2,LOW);       digitalWrite(rm2,LOW);
           isMoving=false;
-          xQueueOverwrite(xQueueRed, &isMoving);
-          xQueueOverwrite(xQueueGreen, &isMoving);
+
+          xQueueOverwrite(xQueueLed, &isMoving);
           }
       else {
     	  Serial.print("Invalid command: ");

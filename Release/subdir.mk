@@ -5,21 +5,21 @@
 # Add inputs and outputs from these tool invocations to the build variables 
 CPP_SRCS += \
 ../buzzer.cpp \
+../cg2271.cpp \
 ../led.cpp \
-../movement.cpp \
-../test.cpp 
+../movement.cpp 
 
 OBJS += \
 ./buzzer.o \
+./cg2271.o \
 ./led.o \
-./movement.o \
-./test.o 
+./movement.o 
 
 CPP_DEPS += \
 ./buzzer.d \
+./cg2271.d \
 ./led.d \
-./movement.d \
-./test.d 
+./movement.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes
